@@ -1,12 +1,14 @@
 ## Project initiation document
 
-**Bayesian Hierarchical Modelling of Helium Signatures in Red Giant Stars**
+**Title:** Bayesian Hierarchical Modelling of Helium Signatures in Red Giant Stars
 
-Authors: Joshua Cardrick, Daniel Williams
-Supervisor: Dr Guy Davies
-Date: Sept 2018 - May 2019
+**Authors:** Joshua Cardrick, Daniel Williams
 
-Version History:
+**Supervisor:** Dr Guy Davies
+
+**Date:** Sept 2018 - May 2019
+
+#### Version History:
 V1.0 - Start of project 1/10/2018
 
 #### Background
