@@ -1,0 +1,22 @@
+During our first meeting we discussed the following:
+
+  Some background for the measurements and data we will be using:
+    amplitude of asteroseismic oscillations as helium signatures
+    few thousand stars used to counter uncertainty
+    statistically heavy project
+  Methodology - Bayesian Hierarchical modelling
+    Python (from ground up)
+    Stan (PyStan)
+    PyMC3
+  Some parameters we will be using:
+    mass
+    temperature
+    radius
+    metallicity
+  Mentioned helium enrichment as a function of metallicity
+
+Before the next session which is set for 3pm on Friday 12th:
+
+Set up GitHub repo
+Read 2 of 3 articles provided
+Start preparing Project proposal due in week 4
