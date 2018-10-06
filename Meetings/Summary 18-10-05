@@ -1,0 +1,18 @@
+Project Meeting - 5/10/18
+*************************
+
+Discussed content to go into project proposal (due 26th):
+	- Context in research: lack of knowledge about He abundance and impact on other 		parameters (eg fe/h, evolution) stellar evolution etc.
+	- Introduction to asteroseismology
+	- How does the He glitch arise? (Helium II is ionisation region near the surface of 		the star).
+	- Introduction to HBM (use of latent variable techniques).
+
+
+
+Get stan/git/python running on laptops (jupyter notebook would be a good method of keeping record of code as a 'lab book').
+
+Read about Bayesian Hierarchical Modelling, using Hogg 2010 paper. Also, read some blog posts / tutorials for understanding.
+
+Next meeting: 15th Oct
+
+
