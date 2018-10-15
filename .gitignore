@@ -1,3 +1,4 @@
 # Files to ignore:
 *.py
 .ipynb_checkpoints
+*checkpoint.ipynb
