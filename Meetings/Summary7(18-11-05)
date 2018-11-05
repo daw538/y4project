@@ -1,0 +1,15 @@
+Project Meeting - 05/11/18
+**************************
+
+- For HBM: start simple, have fixed nu max and without decay, only distribute over amplitude of sine wave and then explore metallicity for 50 stars
+- Agreed upon deliverable for 1st term: HBM up and running for end of term
+- Discussed our own takes on the HBM examples
+
+Aims for before next meeting:
+- Use Vrard paper to construct model, use python to make dummy data, explore HBM
+- Need to write paragraph proposing the deliverable
+- Need to look at: how glitch relates to helium content (Broomhall)
+- Make more commits to repo, explain commits in terms of work done, 4 commits per week each ( 25 meaningful commits each before end of term)
+- Fill out progress review forms
+
+Next meeting: Monday 12/11/18 15:00
