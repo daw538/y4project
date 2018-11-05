@@ -4,6 +4,7 @@ Project Meeting - 05/11/18
 - For HBM: start simple, have fixed nu max and without decay, only distribute over amplitude of sine wave and then explore metallicity for 50 stars
 - Agreed upon deliverable for 1st term: HBM up and running for end of term
 - Discussed our own takes on the HBM examples
+- Ollie sat in for the first part and discussed project, will send us data/graphs from his project
 
 Aims for before next meeting:
 - Use Vrard paper to construct model, use python to make dummy data, explore HBM
