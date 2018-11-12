@@ -1,0 +1,16 @@
+Project Meeting - 12/11/18
+**************************
+
+- Handed in year review forms
+- Ran through both Dan & Josh's HBM models for a (decaying) sine wave
+    - Showed how to implement functions in Stan
+
+
+Aims before next meeting:
+- Look at theory to understand how He content relates directly to size of Helium glitch.
+- Attempt to reproduce working HBM similar to example demonstrated by Guy in meeting.
+    - Be careful with Stan syntax and notation (be consistent with rest of script).
+- Continue commits to github
+
+
+Next Meeting: Monday 19/11/18 15:00
