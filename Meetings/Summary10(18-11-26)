@@ -1,0 +1,31 @@
+Project Meeting - 26/11/18
+**************************
+
+- Discussed issues relating to estimation of phase parameter (restrict range -2π to 2π and account for the fact the HBM starts on moving in one direction initially in parameter space).
+	- Moving the centre point could help
+- Fitting the vrard data to our models:
+	- Using ν_max ~ 22 may be useful
+	- Restrict values of n initially to remove the large 'tail' at lower frequencies
+
+
+Aims before next meeting:
+
+- Apply Vrard model to our data
+	- Curvature? / sine function to account for BCZ
+- Look for source of potential bias in estimation of beta in OscillationsHBM
+- Keep an eye on the deliverable: organise a second meeting for this week based on progress made.
+
+
+Meeting Music: Creedence Clearwater Revival
+Next Meeting: TBC
+
+
+
+
+
+
+
+
+
+
+
