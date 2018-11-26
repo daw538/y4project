@@ -1,0 +1,21 @@
+Project Meeting - 19/11/18
+**************************
+
+- Discussed glitch amplitude and nu_max (direct) relation to helium abundance
+- Went through our HBM oscillation examples
+- Discussed using data of sun to begin with
+- Listened to classical music
+
+Aims before next meeting:
+- Make data in our examples resemble asteroseismic data
+- Add phase shift to simulated data
+- Be in a position to begin analysing data (sun)
+- Continue commits to GitHub
+
+Plan: 
+This week (8) - model for sun
+Next week (9) - 50 stars
+Week 10 & 11 - Hierarchical model (deliverable)
+Flag issues on GitHub or email
+
+Next Meeting: Monday 26/11/18 15:00
