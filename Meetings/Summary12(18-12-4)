@@ -1,0 +1,34 @@
+Project Meeting- 4/12/18
+**************************
+
+Given RG data,
+
+Plot 9 RGs at random,
+
+Plot model and play with ranges to deduce priors,
+
+Plot distribution as output parameters of numax,
+
+Build beginnings of function to set hierarchical priors on model,
+
+Table 1 of Vrard "Asymptotic properties" gives relations to fit to parameters (epsilon = f(dnu), then later, Amplitude)
+
+Use HBM repo:
+
+- In problem 2 for transformed parameters
+
+- In problem 3 in HBM repo
+
+
+Aim to have model:
+
+-reads in data
+
+-first guesses
+
+-priors
+
+-1 hierarchical element
+
+
+Next meeting: 3.30 - 5pm Monday 10th December
