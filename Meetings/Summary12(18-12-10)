@@ -1,0 +1,21 @@
+Project Meeting - 10/12/18
+**************************
+
+Discussed context of deliverable and project (with seminar in mind)
+	- Aims (He abundance and spread)
+	- Methods (asteroseismology), leveraging population ensemble
+
+Aims in order to meet deliverable:
+	- Load in 50 stars (2D array in stan)
+	- Latent (8) parameters
+	- Hyperparameters (period and numax/nmax/delta nu):
+		period/omega; curvature k; amplitude (as delta nu)
+		- See vrard paper table 1
+	- extrapolate data they have same length: give them huge uncertainties
+
+Plot period against deltanu for many stars
+	- best fit straight line (or power law) used to provide hyperprior
+
+Meeting Music: 'Christmas' noise from outside
+Next meeting: 10am Fri 14th December
+
