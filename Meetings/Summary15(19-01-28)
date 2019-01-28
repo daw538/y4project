@@ -1,0 +1,21 @@
+Project Meeting - 28/01/19
+**************************
+
+Recieved feedback on project seminar (see canvas for notes)
+	- Points to note: He abundance in stars tends to fall within 0.24-0.28
+	- Waves interfere to produce the individual modes
+	- Acyclic graph (aka. probabilistic graphical model)
+
+
+Discussed problems with HBMs and potential methods to resolve:
+	- Introduce a reparameterised variable into model
+	- Test without glitch present (output data can be reused in full model)
+	- Diagnostic plots:
+		* Frequency vs n (tests ν_max, Δν)
+		* Residuals of above; set glitch=0 and subtract freq (tests A, G)
+		* As above, but against the full model (tests goodness of fit)
+
+
+Next meeting: 10am Thurs 31st January (Skype)
+
+
