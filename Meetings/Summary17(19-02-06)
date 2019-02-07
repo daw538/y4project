@@ -1,0 +1,12 @@
+Project Mini Meeting - 06/02/19
+**************************
+
+- Discussed how to implement reparameterisation of A into stan to improve convergence
+	- Rearrange A=A0*exp(-nmax/tau) to find A0 (other variables as free parameters)
+	- Don't need A hierarchical initially to work; can be reintroduced later.
+- Can test accuracy of GYRE models by computing expected nmax using scaling
+  relations from Teff, log_R, log_M etc.
+	- Perhaps take models below the RGB bump.
+- Remember to start backing up work!
+
+Next meeting: TBC
