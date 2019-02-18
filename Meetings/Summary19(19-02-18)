@@ -1,0 +1,18 @@
+Project Meeting - 18/02/19
+**************************
+
+- Continue to work finessing model
+	* Try to reintroduce A as a hierarchical parameter in the model
+	* Use plots between parameters (seaborn pairplot); potentially to develop
+		hierarchical elements for G and phi. Also posterior of A against metallicity
+	* Potentially redefine A as student-t in stan
+- Comparison between stellar models and cluster data
+	* More models (vary metallicity also)
+	* Josh to email Guy for data from clusters
+	* Elsworth classification ??
+- Begin to consider project conclusion
+	* Scripts to automate plot production?
+	* Report content and structure (inc daft plots)
+
+Next meeting: Mon 25th (TBC)
+
