@@ -15,13 +15,8 @@ files = [glob.glob('LOGS/' + i + '/*.index') for i in folders]
 
 
 for i,k in zip(files, folders):
-    #f = str(i).replace("[","").replace("]","")
     df = pd.read_csv(i[0], skiprows=1, delim_whitespace=True, names=['model','priority','profile'])
-    prof1 = df.loc[(df.priority == 1)]['profile'].min()
-    prof2 = df.loc[(df.priority == 1)]['profile'].max()
-    profiles = [prof1, prof2] 
-    
-    print(k)
+    profiles = df.loc[(df.priority == 1)]['profile'].values
     
     star = str(i[0][13:28])
     
@@ -33,9 +28,9 @@ for i,k in zip(files, folders):
         }
         
         output = gyre_inlist(variables)
-        #print(output)
-        #input("Press Enter to continue...")
+        print(output)
+        input("Press Enter to continue...")
         with open('gyre.in', 'w') as f:
             f.write(output)
-        os.system('$GYRE_DIR/bin/gyre gyre.in')
-      
+        #os.system('$GYRE_DIR/bin/gyre gyre.in')
+    
