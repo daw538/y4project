@@ -1,13 +1,3 @@
-Classification for all the stars analysed. 
-In column 1 is the KIC number of the star concerned. 
-In column 2 is the classification where 
-RGB=red-giant branch, 
-RC=red clump, 
-2CL=secondary clump,
-U=unclassified  
-nmx-too-high=\nuMax\ is above the range considered.
-
-	KIC_number	Classification
         1027337  RGB   
         1160789  RC   
         1160986  RGB   
