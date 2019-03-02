@@ -29,6 +29,7 @@
       
       implicit none
       
+      real(dp) :: r_init
       ! these routines are called by the standard run_star check_model
       contains
       
@@ -87,6 +88,7 @@
          else ! it is a restart
             call unpack_extra_info(s)
          end if
+         r_init = 0.4d0
       end function extras_startup
       
 
@@ -117,10 +119,11 @@
          !   return
          !end if
 
-         if (s% log_surface_radius > 1.402d0) then
-            ! stop when radius of star reaches ~25 solar radii
+         if (s% log_surface_radius > 1.502d0 .and. &
+             s% center_h1 < 1.0d-3) then
+            ! stop when radius of star reaches ~31.6 solar radii
             extras_check_model = terminate
-            write(*, *) 'reached cutoff at log_R = 1.4 (~25 R_sun)'
+            write(*, *) 'reached cutoff at log_R = 1.5 (~31.6 R_sun)'
             return
          end if
 
@@ -268,13 +271,17 @@
          call store_extra_info(s)
 
          ! (np.abs(i['log_R']-0.85) < 0.01)
-         if (MODULO(s% log_surface_radius,0.1)<0.01 .and. &
-                MODULO(s% model_number,25)==0 .and. &
-				s% log_surface_radius > 0.3d0 .and. &
-				s% star_age > 1d9) then
+         if (s% log_surface_radius - r_init > 0.1d0 .and. &
+				s% center_h1 < 1.0d-3) then
+         !if (MODULO(s% log_surface_radius,0.1)<0.01 .and. &
+         !       MODULO(s% model_number,25)==0 .and. &
+		 !  	s% log_surface_radius > 0.3d0 .and. &
+		 !		s% star_age > 1d9) then
 
-         ! to save a profile, 
+         ! to save a profile,
+            s% need_to_update_history_now = .true.
             s% need_to_save_profiles_now = .true.
+            r_init = r_init + 0.1d0
          ! to update the star log,
             ! s% need_to_update_history_now = .true.
 

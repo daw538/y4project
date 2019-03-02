@@ -4,7 +4,7 @@
 
 &model
 	model_type = 'EVOL'  ! Obtain stellar structure from an evolutionary model
-	file = '/LOGS/folder/modelname_NNN.profile.GYRE'    ! File name of the evolutionary model
+	file = 'LOGS/folder/modelname_NNN.profile.GYRE'    ! File name of the evolutionary model
 	file_format = 'MESA' ! File format of the evolutionary model
 /
 
@@ -25,8 +25,8 @@
 	freq_min_units = 'UHZ'   	! Interpret freq_min as being in uHz
 	freq_max_units = 'UHZ'	 	! Interpret freq_max as being in uHz
 	freq_min = 10       		! Minimum frequency to scan from
-	freq_max = 150        		! Maximum frequency to scan to
-	n_freq = 50          		! Number of frequency points in scan
+	freq_max = 150       		! Maximum frequency to scan to
+	n_freq = 200          		! Number of frequency points in scan
 /
 
 &grid
@@ -38,12 +38,12 @@
 
 &ad_output
 	freq_units = 'UHZ'	! Interpret freq_min and freq_max as having units of microHertz
-	summary_file = 'LOGS/folder/profileNNN_summary.txt'                    ! File name for summary file
+	summary_file = 'LOGS/folder/modelname_NNN.summary.txt'                    ! File name for summary file
 	summary_file_format = 'TXT'                             ! Format of summary file
 	summary_item_list = 'M_star,R_star,l,n_pg,freq,E_norm' ! Items to appear in summary file
-	mode_template = 'LOGS/folder/modeNNN_.%J.txt'                			! File-name template for mode files
-	mode_file_format = 'TXT'                   				! Format of mode files
-	mode_item_list = 'l,n_pg,omega,x,xi_r,xi_h'				! Items to appear in mode files
+	!mode_template = 'LOGS/folder/modeNNN_.%J.txt'                			! File-name template for mode files
+	!mode_file_format = 'TXT'                   				! Format of mode files
+	!mode_item_list = 'l,n_pg,omega,x,xi_r,xi_h'				! Items to appear in mode files
 /
 
 &nad_output
