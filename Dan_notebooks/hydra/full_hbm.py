@@ -130,26 +130,32 @@ nchains = 4
 fit1 = sm1.sampling(data=stan_data, iter=iters_notau, chains=nchains, init=[start for n in range(nchains)])
 summ_notau = fit1.stansummary()
 
-params = np.zeros([len(IDs), 8])
+params = np.zeros([len(IDs), 9])
 
 for i in np.arange(0,len(IDs),1):
-    params[i] = [np.mean(fit1['dnu'], axis=0)[i],
-           np.mean(fit1['numax'], axis=0)[i],
-           np.mean(fit1['epsilon'], axis=0)[i],
-           np.mean(fit1['alpha'], axis=0)[i],
-           np.mean(fit1['A'], axis=0)[i],
-           np.mean(fit1['G'], axis=0)[i],
-           np.mean(fit1['phi'], axis=0)[i],
-                np.nan]
+    params[i] = [IDs[i],
+				np.mean(fit1['dnu'], axis=0)[i],
+				np.mean(fit1['numax'], axis=0)[i],
+				np.mean(fit1['epsilon'], axis=0)[i],
+				np.mean(fit1['alpha'], axis=0)[i],
+				np.mean(fit1['A'], axis=0)[i],
+				np.mean(fit1['G'], axis=0)[i],
+				np.mean(fit1['phi'], axis=0)[i],
+				np.nan]
 
 np.savetxt('no_tau_models.csv', params, delimiter=',')
+
+if print_fit == True:
+	with open('fullsumm_notau.txt', 'w') as f:
+		f.write(summ_notau)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Resample for model that includes the decay term
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 sm2 = pickle.load(open('tau_stan.pkl', 'rb'))
 
-no_tau = pd.read_csv('no_tau_models.csv', names=['dnu', 'numax', 'epsilon', 'alpha', 'A', 'G', 'phi', 'tau'])
+no_tau = pd.read_csv('no_tau_models.csv', names=['kic', 'dnu', 'numax',
+					 'epsilon', 'alpha', 'A', 'G', 'phi', 'tau'])
 
 stan_data = {'N': len(IDs),
          'M': maxmodes,
@@ -178,29 +184,28 @@ start = {'dnu': dnu_avgarr,
          'AA': 0.07,
          'AB': 0.87,
          #'GA': 3.08
-         'tau': np.ones([len(IDs)])*800
+         'tau': np.ones([len(IDs)])*10
     }
 nchains = 4
 
 fit2 = sm2.sampling(data=stan_data, iter=iters_tau, chains=nchains, init=[start for n in range(nchains)])
 summ_tau = fit2.stansummary()
 
-params = np.zeros([len(IDs), 8])
+params = np.zeros([len(IDs), 9])
 
 for i in np.arange(0,len(IDs),1):
-	params[i] = [np.mean(fit2['dnu'], axis=0)[i],
-		       np.mean(fit2['numax'], axis=0)[i],
-		       np.mean(fit2['epsilon'], axis=0)[i],
-		       np.mean(fit2['alpha'], axis=0)[i],
-		       np.mean(fit2['A'], axis=0)[i],
-		       np.mean(fit2['G'], axis=0)[i],
-		       np.mean(fit2['phi'], axis=0)[i],
-		       np.mean(fit2['tau'], axis=0)[i]]
+	params[i] = [IDs[i],
+				np.mean(fit2['dnu'], axis=0)[i],
+				np.mean(fit2['numax'], axis=0)[i],
+				np.mean(fit2['epsilon'], axis=0)[i],
+				np.mean(fit2['alpha'], axis=0)[i],
+				np.mean(fit2['A'], axis=0)[i],
+				np.mean(fit2['G'], axis=0)[i],
+				np.mean(fit2['phi'], axis=0)[i],
+				np.mean(fit2['tau'], axis=0)[i]]
 
 np.savetxt('tau_models.csv', params, delimiter=',')
 
 if print_fit == True:
-	with open('fullsumm_notau.txt', 'w') as f:
-		f.write(summ_notau)
 	with open('fullsumm_tau.txt', 'w') as f:
 		f.write(summ_tau)

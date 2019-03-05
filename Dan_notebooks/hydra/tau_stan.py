@@ -7,7 +7,7 @@ functions {
     real glitch(real n, real dnu, real numax, real epsilon, real alpha, real A, real G, real phi, real tau){
         real nmax = numax/dnu - epsilon;
         return (n + epsilon + alpha/2 * (n-nmax)^2 + 
-                (A*G)/(2*pi()) * sin((2*pi()*(n-nmax))/G + phi)) * dnu * exp(-(n-nmax)/tau);
+                (A*G)/(2*pi()) * sin((2*pi()*(n-nmax))/G + phi) * exp(-(n-nmax)/tau)) * dnu;
     }
 }
 
@@ -27,7 +27,6 @@ parameters {
     real dnu[N];
     real numax[N];
     real<lower = -2.0*pi(), upper = 2.0*pi()> phi[N];
-    //real<lower = 0> A[N];
     real G[N];
     real<lower = 0> tau[N];
     
@@ -73,21 +72,15 @@ model {
     for (i in 1:N){
         for (j in 1:M){
             mod[j] = glitch(n[i,j], dnu[i], numax[i], epsilon[i], alpha[i], A[i], G[i], phi[i], tau[i]);
-            // mod[j] ~ normal(freq[i], freq_err[i]);
         }
         freq[i,:] ~ normal(mod, freq_err[i,:]);
-        dnu[i] ~ normal(dnu_guess[i], dnu_guess[i]*0.001);
+        dnu[i] ~ normal(dnu_guess[i], dnu_guess[i]*0.01);
         numax[i] ~ normal(numax_obs[i], numax_err[i]);
-        //A[i] ~ lognormal(log(0.06*dnu[i]^(-0.88)), 0.4);
     }
-    
-    //epsilon ~ uniform(-1.0, 2.0);
-    //nmax ~ normal(10, 4);
-    //alpha ~ lognormal(log(0.015*dnu^(-0.32)), 0.3);
     
     G ~ normal(3.08, 0.65);  
     //numax ~ normal(numax_obs, numax_err);
-    tau ~ normal(500, 100);
+    tau ~ normal(10, 4);
     
     // Hierarchical Parameters
     eps_std ~ normal(0, 1);
