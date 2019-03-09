@@ -84,9 +84,13 @@ numax_obs = Numax
 nmax = numax_obs/dnu_avgarr - epsilon
 alpha = 0.015*dnu_avgarr**(-0.32)
 A = 0.06*dnu_avgarr**(-0.88) 
-G = np.ones([len(IDs)])*3.08
-tau = np.ones([len(IDs)])*200
+#tau = np.ones([len(IDs)])*200
 phi = np.ones([len(IDs)])*1.71
+
+G = np.ones([len(IDs)])*3.08
+epsilon = np.ones([len(IDs)])*0.05
+alpha = np.ones([len(IDs)])*0.01
+A = np.ones([len(IDs)])*0.03
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -111,9 +115,9 @@ start = {'dnu': dnu_avgarr,
          'al_std': 0.01,
          'A_err': 0.01,
          #'G_err': 0.65,
-         #'epsilon': epsilon,
-         #'alpha': alpha,
-         #'A': A,
+         'epsilon': epsilon,
+         'alpha': alpha,
+         'A': A,
          'G': G,
          'phi': phi,
          'epsA': 0.601,
@@ -152,12 +156,26 @@ if print_fit == True:
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Resample for model that includes the decay term
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-sm2 = pickle.load(open('tau_stan.pkl', 'rb'))
-
+# Read in best starting parameters, then find indexes of any stars
+# that have unphysical/outlying values. Use these indexes to remove,
+# from arrays and data that are parsed into stan for the full run.
 no_tau = pd.read_csv('no_tau_models.csv', names=['kic', 'dnu', 'numax',
 					 'epsilon', 'alpha', 'A', 'G', 'phi', 'tau'])
+idxs = no_tau[(no_tau['A']<0.0) | (no_tau['A']>0.1) |
+              (no_tau['alpha']<0.0)| (no_tau['epsilon']>0.35)].index
 
-stan_data = {'N': len(IDs),
+arr_n = np.delete(arr_n, [idxs], axis=0)
+arr_freq = np.delete(arr_freq, [idxs], axis=0)
+arr_freqerr = np.delete(arr_freqerr, [idxs], axis=0)
+Numax = np.delete(Numax, [idxs], axis=0)
+Numax_err = np.delete(Numax_err, [idxs], axis=0)
+dnu_avgarr = np.delete(dnu_avgarr, [idxs], axis=0)
+
+no_tau = no_tau.drop(no_tau.index[[idxs]])
+
+sm2 = pickle.load(open('tau_stan.pkl', 'rb'))
+
+stan_data = {'N': len(no_tau['kic']),
          'M': maxmodes,
          'n': arr_n, 
          'freq': arr_freq,
@@ -184,16 +202,16 @@ start = {'dnu': dnu_avgarr,
          'AA': 0.07,
          'AB': 0.87,
          #'GA': 3.08
-         'tau': np.ones([len(IDs)])*10
+         'tau': np.ones([len(no_tau['kic'])])*10
     }
 nchains = 4
 
 fit2 = sm2.sampling(data=stan_data, iter=iters_tau, chains=nchains, init=[start for n in range(nchains)])
 summ_tau = fit2.stansummary()
 
-params = np.zeros([len(IDs), 9])
+params = np.zeros([len(no_tau['kic']), 9])
 
-for i in np.arange(0,len(IDs),1):
+for i in np.arange(0,len(no_tau['kic']),1):
 	params[i] = [IDs[i],
 				np.mean(fit2['dnu'], axis=0)[i],
 				np.mean(fit2['numax'], axis=0)[i],
