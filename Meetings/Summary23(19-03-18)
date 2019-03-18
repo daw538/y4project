@@ -1,0 +1,16 @@
+Project Meeting - 18/03/19
+**************************
+
+* Discussed recent attempts to improve convergence, since clusters are
+  proving difficult (especially NGC6791).
+	- Re-initialise As in tau model to be defined using hyperparameters
+	  AA and AB found in first model.
+	- Develop a power law for phi in dnu to help deal with negative As
+	  (red clump stars in data have -ve values which seems to be causing
+	  issues).
+	- Abandon NGC6791 for now until more important aspects have been
+	  dealt with.
+
+* Covered points relating to structure and content of final reports.
+
+Next meeting: Weds 20th Mar 4pm
