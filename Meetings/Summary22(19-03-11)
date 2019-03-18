@@ -1,0 +1,13 @@
+Project Meeting - 11/03/19
+**************************
+
+Discussed latest stan results, good covergence
+Looking into fit analysis: 
+data coloured by temperature
+single outlier in A -> possibly dropped cluster star
+Basu 2004, McKeever 2019, for comparison to GE models
+Discussed the plotting of cluster stars
+Fit each individually and then plot together
+As 50-60 stars per cluster, use hydra for max iterations
+
+Next meeting: Mon 18th Mar 3pm
