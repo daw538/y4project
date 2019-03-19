@@ -24,11 +24,11 @@ data {
 
 parameters {
     // Normal Parameters
-    real dnu[N];
-    real numax[N];
-    real<lower = -2.0*pi(), upper = 2.0*pi()> phi[N];
-    real G[N];
-    real<lower = 0> tau[N];
+    real<lower=0> dnu[N];
+    real<lower=0> numax[N];
+    real<lower=0> G[N];
+    real<lower=-2.0*pi(), upper=2.0*pi()> phi[N];
+    real<lower=0> tau[N];
     
     
     // Hierarchical Parameters
@@ -44,8 +44,8 @@ parameters {
     
     real A_std[N];
     real<lower=0> A_sig;
-    real AA;
-    real AB;
+    real<lower=0> AA;
+    real<lower=0> AB;
     
     //real G_std[N];
     //real<lower=0> G_sig;
@@ -74,10 +74,13 @@ model {
             mod[j] = glitch(n[i,j], dnu[i], numax[i], epsilon[i], alpha[i], A[i], G[i], phi[i], tau[i]);
         }
         freq[i,:] ~ normal(mod, freq_err[i,:]);
-        dnu[i] ~ normal(dnu_guess[i], dnu_guess[i]*0.01);
+        dnu[i] ~ normal(dnu_guess[i], dnu_guess[i]*0.1);
         numax[i] ~ normal(numax_obs[i], numax_err[i]);
+		//A[i] ~ uniform(0.000001, 0.1);
     }
     
+	//epsilon ~ uniform(0.001, 1.5);
+	//A ~ uniform(0.0001, 0.1);
     G ~ normal(3.08, 0.65);  
     //numax ~ normal(numax_obs, numax_err);
     tau ~ normal(10, 4);

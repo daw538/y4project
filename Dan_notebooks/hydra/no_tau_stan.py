@@ -22,30 +22,31 @@ data {
 }
 parameters {
 	// Normal Parameters
-    real dnu[N];
-    real numax[N];
-    real<lower = -2.0*pi(), upper = 2.0*pi()> phi[N];
-    real G[N];
+    real<lower=0> dnu[N];
+    real<lower=0> numax[N];
+    real<lower=0> G[N];
+    real<lower=-2.0*pi(), upper=2.0*pi()> phi[N];
+
 
 
 	// Hierarchical Parameters
-    real epsilon_std[N];
-    real<lower=0> eps_std;
+    real eps_std[N];
+    real<lower=0> eps_sig;
     real epsA;
     real epsB;
 
-    real alpha_std[N];
-    real<lower=0> al_std;
+    real al_std[N];
+    real<lower=0> al_sig;
     real alA;
     real alB;
 
     real A_std[N];
-    real<lower=0> A_err;
-    real AA;
-    real AB;
+    real<lower=0> A_sig;
+    real<lower=0> AA;
+    real<lower=0> AB;
 
     //real G_std[N];
-    //real<lower=0> G_err;
+    //real<lower=0> G_sig;
     //real GA;
     
 }
@@ -55,11 +56,12 @@ transformed parameters {
     real alpha[N];
     real A[N];
     //real G[N];
+
     for (i in 1:N){
-        epsilon[i] = epsilon_std[i] * eps_std + (epsA + epsB * log(dnu[i]));
-        alpha[i] = alpha_std[i] * al_std + (alA * (dnu[i])^(-alB));
-        A[i] = A_std[i] * A_err + (AA * (dnu[i])^(-AB));
-        //G[i] = G_std[i] * G_err + GA;
+        epsilon[i] = eps_std[i] * eps_sig + (epsA + epsB * log(dnu[i]));
+        alpha[i] = al_std[i] * al_sig + (alA * (dnu[i])^(-alB));
+        A[i] = A_std[i] * A_sig + (AA * (dnu[i])^(-AB));
+        //G[i] = G_std[i] * G_sig + GA;
     }
 }
 
@@ -70,32 +72,35 @@ model {
             mod[j] = glitch(n[i,j], dnu[i], numax[i], epsilon[i], alpha[i], A[i], G[i], phi[i]);
         }
         freq[i,:] ~ normal(mod, freq_err[i,:]);
-        dnu[i] ~ normal(dnu_guess[i], dnu_guess[i]*0.01);
+        dnu[i] ~ normal(dnu_guess[i], dnu_guess[i]*0.1);
 		numax[i] ~ normal(numax_obs[i], numax_err[i]);
+		//A[i] ~ uniform(0.000001, 0.1);
     }
-    
+
+	//epsilon ~ uniform(0.001, 1.5);
+	//
     G ~ normal(3.08, 0.65);
     //phi ~ normal(1.71, 0.77);
     //numax ~ normal(numax_obs, numax_err);
     
     // Hierarchical Parameters
-    epsilon_std ~ normal(0, 1);
-    eps_std ~ normal(0, 0.5);
+    eps_std ~ normal(0, 1);
+    eps_sig ~ normal(0, 0.5);
     epsA ~ normal(0.601, 0.25);
     epsB ~ normal(0.632, 0.25);
 
-    alpha_std ~ normal(0, 1);
-    al_std ~ normal(0, 0.5);    
+    al_std ~ normal(0, 1);
+    al_sig ~ normal(0, 0.5);    
     alA ~ normal(0.015, 0.005);
     alB ~ normal(0.32, 0.08);
 
-    A_std ~ normal(0, 1);
-    A_err ~ normal(0, 0.5);
+    A_std ~ student_t(5, 0, 1);
+    A_sig ~ normal(0, 0.5);
     AA ~ normal(0.06, 0.02);
     AB ~ normal(0.88, 0.05);
 
     //G_std ~ normal(0, 1);
-    //G_err ~ normal(0.65, 0.5);
+    //G_sig ~ normal(0.65, 0.5);
     //GA ~ normal(3.08, 0.1);
 }
 '''
